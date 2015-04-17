@@ -1,0 +1,25 @@
+1.which mail 
+—>
+it would show place where mail function installed,if not,
+just install it,
+cli:
+	sudo yum install mail/mailutil or sudo apt-get install mail/mailutil
+or
+which sendmail
+2.go to xampp etc file,edit php.ini
+search smtp,check the port(25),and remove ‘;’ before ‘sendmail_path=’,
+and add the mail or sendmail path to it,e.g.:
+sendmail_path=/usr/sbin/sendmail -t -i or /bin/mail -t -i
+and save php.ini 
+3.restart xampp server
+4.if you want to your email no-reply
+config follow:
+go to os root folder:
+->sudo vi //etc/aliases
+
+some aliases would be empty,just add 
+‘no-reply: /dev/null’
+and save 
+restart xampp server
+
+finally,you can receive another email(explain your reply cannot send to recover) when you reply.

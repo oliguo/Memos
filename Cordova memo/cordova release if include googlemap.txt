@@ -1,0 +1,19 @@
+cordova signature keystone(upload google play):
+keytool -exportcert -alias yourappnameAlias -keystore your keystonePath | openssl sha1 -binary | openssl base64
+
+
+if your app has google map function ,it will re-register your android key with your real keystone file:
+cli->
+keytool -list -v -keystore your keystore absolute path/yourappname.keystore -alias yourappname 
+then,enter your keystore password,you will get follow some content:
+
+Certificate fingerprints:
+	 MD5:  xxxxxxx:xxxxxx:…
+	 SHA1: xxxxxxx:xxxxxx:…
+	 SHA256: xxxxxxx:xxxxxx:…
+	 Signature algorithm name: SHA256withRSA
+	 Version: 3
+
+
+and then follow reference:
+https://github.com/wf9a5m75/phonegap-googlemaps-plugin/wiki/TroubleShooting:-Blank-Map

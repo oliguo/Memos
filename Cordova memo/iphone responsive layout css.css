@@ -1,0 +1,24 @@
+//iphone responsive layout css
+
+//iphone-4/4s
+@media screen and (device-width:320px) and (device-height: 480px) {
+//css style
+}
+
+//iphone-5/5s
+@media screen and (device-width:320px) and (device-height: 568px) {
+//css style
+}
+
+//iphone-6
+@media screen and (device-width:375px) and (device-height: 667px) {
+//css style
+}
+
+//iphone-6-plus
+@media screen and (device-width:414px) and (device-height: 736px) {
+//css style
+}
+
+//reference:
+//http://www.w3cplus.com/css3/css3-media-queries-for-different-devices

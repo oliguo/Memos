@@ -1,0 +1,6 @@
+
+
+sudo nano ~/.bash_profile
+
+export ANDROID_HOME=/Users/vtl-solutionsltd/Library/Android/sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools/

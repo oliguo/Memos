@@ -1,0 +1,63 @@
+config Phalcon with xampp 
+(reference:
+http://blog.thesecretlab.nl/install-phalcon-on-a-mac/):
+
+1.run cli: 
+which php
+—>if not xampp,please add xampp to  your bash_profile
+ (run cli:sudo nano ~/.bash_profile ) below:
+
+export PATH=/Applications/XAMPP/xamppfiles/bin:${PATH}
+
+2.run ‘which php’ to check
+->console show:
+/Applications/XAMPP/xamppfiles/bin/php
+
+it works first!
+
+3.install module gettext
+->brew install gettext
+and
+->brew link gettext --force
+if show permission,run
+->sudo chown -R $USER /usr/local/lib
+
+4.install phalcon
+->git clone --depth=1 git://github.com/phalcon/cphalcon.git
+->cd cphalcon/build
+->sudo ./install
+
+5.edit php.ini
+
+add ->extension=phalcon.so
+
+restart xampp,and visit http://localhost/xampp and click ‘phpinfo’ find ‘phalcon’ keyword,
+if show enable ,it works!
+
+6.phalcon cli tool config:
+(referece:http://docs.phalconphp.com/en/latest/reference/mactools.html)
+
+
+if not install wget,run ‘brew install wget’
+then download tool
+
+after install tool,
+run ‘phalcon’
+it would show:
+
+Phalcon DevTools (1.3.4)
+
+Available commands:
+  commands (alias of: list, enumerate)
+  controller (alias of: create-controller)
+  model (alias of: create-model)
+  all-models (alias of: create-all-models)
+  project (alias of: create-project)
+  scaffold
+  migration
+  webtools
+
+
+
+
+

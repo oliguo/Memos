@@ -1,0 +1,64 @@
+reference:https://www.apachefriends.org/faq_linux.html
+- - — - - — - - - — - - - - — - — - - - — - - — - - — -
+step1:
+search port which engages :80/:21/:443/(apache/proftp/mysql)
+—>$sudo netstat -tunap | grep LISTEN
+if port were engaged and you can close them(when you reinstall or remove)
+—>$sudo kill xxxx
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
+step2:
+download newest version（64bit os）
+->$wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.2/xampp-linux-x64-1.8.2-6-installer.run
+then authorising xampp install file,and run it
+->$sudo chmod 777 xampp-linux-*-installer.run
+->$sudo ./xampp-linux-*-installer.run
+- - — - — - - - — - — - - - - - - - - - — - - -  — - - - - — - - - — - — - - - — - — - -
+step3:
+start xampp
+->$sudo /opt/lampp/lampp start 
+and you can visit http://localhost
+if something wrong ,please check your port(return step1)
+- - - — - — - — - — - —  — - — -  - - - - - - - - - - —  —
+step4:
+config xampp security,then restart
+->$sudo /opt/lampp/lampp security 
+->$sudo /opt/lampp/lampp restart
+if want stop
+->sudo /opt/lampp/lampp stop
+  
+Others:
+
+if your project include IO (output file such as img,excel,etc),you need config permission,
+then authorise(777 all permission)
+->$sudo chmod -R 777  /opt/lampp/htdocs/project folder
+if want your file permission,run 
+->$ls -l /opt/lampp/htdocs/project folder
+
+- — — — - — - - - - —  — - — - — - — - — — - - — - - — — - - - - — - - - — - - — - - — - — 
+
+if you want your project access via external network,change xampp config file
+->$sudo vi /opt/lampp/etc/extra/httpd-xampp.conf
+find and replace
+
+<Directory "/opt/lampp/phpmyadmin">
+AllowOverride AuthConfig Limit
+Require all granted
+</Directory>
+
+<LocationMatch "^/(?i:(?:xampp|security|licenses|phpmyadmin|webalizer|server-status|server-info))">
+        Order deny,allow
+       #Deny from all
+        Allow from ::1 127.0.0.0/8 \
+                fc00::/7 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 \
+                fe80::/10 169.254.0.0/16
+
+        ErrorDocument 403 /error/XAMPP_FORBIDDEN.html.var
+</LocationMatch>
+- - - - — - - - — - — - - - — - — - - - — - - — - - - - - - - — - - - - - — - - - - - - - 
+
+FTP:
+
+groupadd oliftp
+useradd -d /opt/lampp/htdocs/ -g oliftp -s /sbin/nologin  loginName
+passwd loginName
+sudo chmod -R 777  /opt/lampp/htdocs/

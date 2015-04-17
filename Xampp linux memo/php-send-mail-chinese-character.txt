@@ -1,0 +1,70 @@
+referece:http://jjdai.zhupiter.com/2010/10/php-%E8%A7%A3%E6%B1%BA%E4%B8%AD%E6%96%87%E9%83%B5%E4%BB%B6%E5%AF%84%E4%BB%B6%E8%80%85-%E6%94%B6%E4%BB%B6%E8%80%85-%E4%BF%A1%E4%BB%B6%E6%A8%99%E9%A1%8C%E4%BA%82%E7%A2%BC%E5%95%8F%E9%A1%8C/
+[PHP] 解決中文郵件寄件者, 收件者名稱, 信件標題亂碼問題
+[PHP] 解決(非 ASCII 編碼)中文郵件寄件者或中文郵件收件者名稱, 或中文信件標題亂碼問題
+
+在 PHP 程式中想要傳送一封含有非 ASCII 編碼(例如: UTF-8編碼)之信件寄件者或信件收件者名稱, 或郵件標題/主旨(subject) 的 email 時, 要根據 RFC 2047 [1] 對 “信件寄件者” 或 “信件收件者” 名稱, 或 “郵件標題/主旨” 做編碼後才能傳送, 不然會遇到亂碼問題 (寄件者或信件收件者名稱, 或郵件標題/主旨出現亂碼).
+
+RFC 2047 中提到的編碼方式有以下兩種:
+
+Quoted-printable
+Base64
+其中:
+
+名稱1 <email-1>, …, 名稱n <email-n> : “信件寄件者” 或 “信件收件者” 中只有名稱的部分要編碼, email 部分不用編碼;
+郵件標題/主旨 : 整個都要編碼
+我們以 Base64 編碼為例看看簡單的範例程式如下:
+
+<?php
+$sCharset = 'utf-8';
+$sMailHeaderFmt = '=?' . $sCharset . '?b?%s?=';  //@ "q": Quoted-printable; "b": Base64
+
+//@ 要送給誰 - 要顯示的中文名稱
+$sNameTo = '諸彼特網站';
+//@ 要送給誰 - email
+$sMailTo = 'zhupiter@gmail.com';
+
+//@ 誰送的 - 要顯示的中文名稱
+$sNameFrom = '阿米哥分享';
+//@ 誰送的 - email
+$sMailFrom = 'amigosharetest@gmail.com';
+
+//@ 信件的主旨
+$sSubject = "這是一封 MIME/HTML 格式的郵件";
+
+//@ 信件內容
+$sMessage = "
+<h1>這是一封信件內容為 HTML 格式的 email</h1>
+你可以在這個內容區域中使用任何 <strong>HTML 語法</strong>
+";
+
+//@ big5 轉成 utf-8 : 我們在 $sCharset 寫說是 utf-8 charset, 所以要轉換
+//@ $sSubject 到這裡才轉, 因為此程式中 $sMessage 會用到 $sSubject
+//@ 其他 $sNameTo 和 $sNameFrom 兩項則不一定要放這
+$sSubject = iconv('big5', $sCharset, $sSubject);
+$sMessage = iconv('big5', $sCharset, $sMessage);
+$sNameTo = iconv('big5', $sCharset, $sNameTo);
+$sNameFrom = iconv('big5', $sCharset, $sNameFrom);
+
+//@ 根據 RFC 2047 做編碼以解決亂碼問題
+$sSubject = sprintf($sMailHeaderFmt, base64_encode($sSubject));
+$sNameTo = sprintf($sMailHeaderFmt, base64_encode($sNameTo));
+$sNameFrom = sprintf($sMailHeaderFmt, base64_encode($sNameFrom));
+
+//@ 串出 email 格式, 名稱和 mail 之間留個空白字元
+$sNameTo = $sNameTo . ' <' . $sMailTo . '>';
+$sMailFrom = $sNameFrom . ' <' . $sMailFrom . '>';
+
+//@ 要傳送 HTML 格式的 email, 我們需要設定 MIME 版本和 Content-type header 內容.
+$sHeaders = 'MIME-Version: 1.0' . "\r\n" .
+"Content-type: text/html; charset=$sCharset\r\n" .
+"From: $sMailFrom\r\n" .
+
+//@ 傳送 email
+mail($sMailTo, $sSubject, $sMessage, $sHeaders);
+?>
+經過以上 RFC 2047 編碼方式以後, 信件接收端應該就不會有亂碼情況.
+
+關鍵字: php亂碼問題, php中文亂碼問題, php mail亂碼 php mail標題亂碼, php utf8亂碼 php utf-8亂碼, base64編碼, 信件寄件者名稱亂碼, php信件標題亂碼, php UTF-8 email, non iso-8859-1 email, Message Header Extensions for Non-ASCII Text
+參考文件:
+[1] RFC2047 – MIME (Multipurpose Internet Mail Extensions) Part Three: Message Header Extensions for Non-ASCII Text
+
