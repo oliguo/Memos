@@ -1,0 +1,40 @@
+1.
+There are some properties/methods you can use:
+
+$().scrollTop()//how much has been scrolled
+$().innerHeight()// inner height of the element
+DOMElement.scrollHeight//height of the content of the element
+So you can take the sum of the first two properties, and when it equals to the last property, you've reached the end:
+
+jQuery(function($) {
+    $('#flux').bind('scroll', function() {
+        if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+            alert('end reached');
+        }
+    })
+});
+http://jsfiddle.net/doktormolle/w7X9N/
+
+reference:
+http://stackoverflow.com/questions/6271237/detecting-when-user-scrolls-to-bottom-of-div-with-jquery
+
+
+2.
+Use the .scroll() event on window, like this:
+
+$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() == $(document).height()) {
+       alert("bottom!");
+   }
+});
+You can test it here:http://jsfiddle.net/nick_craver/gWD66/, this takes the top scroll of the window, so how much it's scrolled down, adds the height of the visible window and checks if that equals the height of the overall content (document). If you wanted to instead check if the user is near the bottom, it'd look something like this:
+
+$(window).scroll(function() {
+   if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+       alert("near bottom!");
+   }
+});
+You can test that version here:http://jsfiddle.net/nick_craver/gWD66/1/, just adjust that 100 to whatever pixel from the bottom you want to trigger on.
+
+reference:
+http://stackoverflow.com/questions/3898130/how-to-check-if-a-user-has-scrolled-to-the-bottom
