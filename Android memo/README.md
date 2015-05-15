@@ -1,0 +1,2 @@
+# Android memo
+development memo
