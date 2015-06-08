@@ -62,3 +62,8 @@ groupadd oliftp
 useradd -d /opt/lampp/htdocs/ -g oliftp -s /sbin/nologin  loginName
 passwd loginName
 sudo chmod -R 777  /opt/lampp/htdocs/
+
+CHANGE PORT FROM FILE:
+opt/lampp/etc/my.cnf (mysql)
+/opt/lampp/etc/php.ini (mysql)
+/opt/lampp/etc/httpd.conf (apache)
