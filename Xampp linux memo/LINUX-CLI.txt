@@ -64,6 +64,6 @@ passwd loginName
 sudo chmod -R 777  /opt/lampp/htdocs/
 
 CHANGE PORT FROM FILE:
-opt/lampp/etc/my.cnf (mysql)
+/opt/lampp/etc/my.cnf (mysql)
 /opt/lampp/etc/php.ini (mysql)
 /opt/lampp/etc/httpd.conf (apache)
