@@ -67,3 +67,6 @@ CHANGE PORT FROM FILE:
 /opt/lampp/etc/my.cnf (mysql)
 /opt/lampp/etc/php.ini (mysql)
 /opt/lampp/etc/httpd.conf (apache)
+
+more ref:
+http://wiki.ubuntu.org.cn/Xampp
