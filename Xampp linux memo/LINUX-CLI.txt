@@ -8,7 +8,7 @@ if port were engaged and you can close them(when you reinstall or remove)
 - — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
 step2:
 download newest version（64bit os）
-->$wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.2/xampp-linux-x64-1.8.2-6-installer.run
+->$wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.3/xampp-linux-x64-1.8.3-5-installer.run
 then authorising xampp install file,and run it
 ->$sudo chmod 777 xampp-linux-*-installer.run
 ->$sudo ./xampp-linux-*-installer.run
