@@ -1,0 +1,8 @@
+html content embed send mail 
+ref:http://stackoverflow.com/questions/6160320/how-to-send-html-table-in-email-body-in-php
+$headers = "From Ahmad \r\n";
+//$headers .= "Reply-To: ". strip_tags($_POST['req-email']) . "\r\n";
+//$headers .= "CC: susan@example.com\r\n";
+$headers .= 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-Type: text/html; charset=UTF-8’ . "\r\n";
+$subject = 'Email report';
