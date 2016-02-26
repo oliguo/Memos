@@ -70,3 +70,7 @@ CHANGE PORT FROM FILE:
 
 more ref:
 http://wiki.ubuntu.org.cn/Xampp
+
+crontab:
+/opt/lampp/bin/php
+/opt/lampp/bin/mysql
