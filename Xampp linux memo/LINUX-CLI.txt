@@ -74,3 +74,6 @@ http://wiki.ubuntu.org.cn/Xampp
 crontab:
 /opt/lampp/bin/php
 /opt/lampp/bin/mysql
+
+export sql by crontab:
+/opt/lampp/bin/php /echosql.php >> /your path/DB+`date +\%Y\%m\%d\%H\%M\%S`-cron.sql 2>&1 
