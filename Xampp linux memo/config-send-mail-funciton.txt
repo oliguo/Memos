@@ -1,17 +1,20 @@
-1.which mail 
+1.run cli:	which mail 
 —>
 it would show place where mail function installed,if not,
 just install it,
-cli:
-	sudo yum install mail/mailutil or sudo apt-get install mail/mailutil
+run cli:	sudo yum install mail/mailutil or sudo apt-get install mail/mailutil
 or
-which sendmail
+run cli:	which sendmail
+
 2.go to xampp etc file,edit php.ini
 search smtp,check the port(25),and remove ‘;’ before ‘sendmail_path=’,
 and add the mail or sendmail path to it,e.g.:
+
 sendmail_path=/usr/sbin/sendmail -t -i or /bin/mail -t -i
+
 and save php.ini 
 3.restart xampp server
+
 4.if you want to your email no-reply
 config follow:
 go to os root folder:
@@ -23,3 +26,103 @@ and save
 restart xampp server
 
 finally,you can receive another email(explain your reply cannot send to recover) when you reply.
+
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
+
+Ubuntu 中sendmail 的安装、配置与发送邮件的具体实现
+
+link:
+http://mars914.iteye.com/blog/1470961
+
+常用发送邮件方式如下：
+
+    1.如何写一般的邮件： mail test@126.com  Cc 编辑抄送对象，Subject:邮件主题,输入回车，邮件正文后，按Ctrl-D结束
+
+    2.快速发送方式： echo “邮件正文” | mail -s 邮件主题 test@126.com
+
+    3.以文件内容作为邮件正文来发送： mail -s test test@126.com < test.txt
+
+    4.发送带附件的邮件： uuencode 附件名称 附件显示名称 | mail -s 邮件主题 发送地址
+
+    例如： uuencode test.txt test.txt | mail -s Test test@126.com
+    
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
+
+lnmp下开启mail函数发送邮件及sendmail启动慢的问题
+
+link:
+http://www.weisay.com/blog/lnmp-mail-sendmail.html
+
+自从换了阿里云服务器之后，我也就没有理过博客的回复评论邮件通知功能。
+前2天有朋友跟我说，之前评论都有邮件通知，现在怎么没有了。
+我想应该是没有开始支持mail()函数的语言，VPS的好处就是自己可以随便折腾。
+于是研究下怎么开启mail()函数，本文做个记录，方便以后可能用到。
+我的阿里云服务器使用的是LNMP环境，CentOS 5.8 64位。
+
+1.安装 sendmail 组件
+yum install sendmail
+
+2.使用下面的命令重启php-fpm进程
+/etc/init.d/php-fpm restart
+
+3.检测sendmail是否运行正常
+/etc/init.d/sendmail status
+
+如果显示正在运行running 就可以。
+可能用到的命令
+/etc/init.d/sendmail start （启动sendmail）
+/etc/init.d/sendmail stop  （关闭sendmail）
+/etc/init.d/sendmail restart （重启sendmail）
+
+4.配置php.ini，填写sendmail的绝对路径
+
+使用命令打开编辑php.ini
+vi /usr/local/php/etc/php.ini
+
+输入?sendmail_path 查找定位（或者手动跳转找到sendmail_path），
+你会发现默认是下面的代码
+;sendmail_path =
+
+按 i 进入编辑，将这行修改为
+sendmail_path = /usr/sbin/sendmail -t –i
+按 Esc 键退出编辑，输入 :wq 保存退出
+
+5.重启php-fpm进程
+/etc/init.d/php-fpm restart
+
+这样就成功了，如果不放心，新建一个php文件，
+命名为 mail.php ，可以使用下面代码测试下。
+<?php
+$txt = "hello,you are a good boy!";
+// 以下的邮箱地址改成你的
+$mail = 'somebody@example.com';
+// 发送邮件
+mail($mail, "My subject", $txt);
+echo 'message was sent!';
+?>
+
+保存并上传至你的网站根目录，并在浏览器运行：
+http://你的网址/mail.php
+
+到时候你的邮箱就应该能收到邮件了，不过基本都在垃圾邮件里面，
+注意查看，如果收不到邮件的话，检查在操作过程时候正常，
+有木有重启sendmail或者重启php。一般来说，就能正常收到邮件了。
+
+当然，功能是实现了，不过用上面的测试代码测试的时候，
+发现成功发一封邮件很慢很慢，要好几十秒甚至一分钟的时候。
+然后我在博客中发表或者回复评论的也是异常的慢，
+超过了用户等待的心理期限。优化这个效率势在必行了，
+不然只能砍掉这个功能。
+网上方法很多很多，修改这个文件又是修改那个文件，
+感觉比较麻烦，于是找个了操作最少的修改，然后成功了。
+
+修改/etc/hosts ，未修改之前
+127.0.0.1 localhost.localdomain localhost
+
+修改成
+127.0.0.1 localhost.localdomain localhost 主机名称
+
+查看本机的主机名称的命令是: hostname
+完成修改之后重启下sendmail
+service sendmail restart
+
