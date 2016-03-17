@@ -63,6 +63,8 @@ useradd -d /opt/lampp/htdocs/ -g oliftp -s /sbin/nologin  loginName
 passwd loginName
 sudo chmod -R 777  /opt/lampp/htdocs/
 
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
+
 CHANGE PORT FROM FILE:
 /opt/lampp/etc/my.cnf (mysql)
 /opt/lampp/etc/php.ini (mysql)
@@ -71,12 +73,16 @@ CHANGE PORT FROM FILE:
 more ref:
 http://wiki.ubuntu.org.cn/Xampp
 
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
+
 crontab:
 /opt/lampp/bin/php
 /opt/lampp/bin/mysql
 
 export sql by crontab:
 /opt/lampp/bin/php /echosql.php >> /your path/DB+`date +\%Y\%m\%d\%H\%M\%S`-cron.sql 2>&1 
+
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
 
 ubuntu 解决语言设置错误的问题
 link:http://wenzhixin.net.cn/2014/01/11/ubuntu_setting_locale_failed
@@ -114,3 +120,5 @@ locale
 默认情况下终端 ssh 的时候会将本地的 locale 传到服务器中，可以通过命令指定 ssh 服务器的语言：
 
 LC_ALL=en_US.UTF-8 ssh <host>
+
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
