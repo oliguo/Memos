@@ -122,3 +122,21 @@ locale
 LC_ALL=en_US.UTF-8 ssh <host>
 
 - — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
+
+set xampp auto start
+
+http://computernetworkingnotes.com/ubuntu-12-04-tips-and-tricks/how-to-start-xampp-automatically-in-ubuntu.html
+
+1.sudo vim /etc/init.d/lampp
+
+2.add below:
+
+#!/bin/bash
+/opt/lampp/lampp start
+
+3.sudo chmod +x /etc/init.d/lampp
+
+4.sudo update-rc.d lampp defaults
+
+5.sudo reboot
+
