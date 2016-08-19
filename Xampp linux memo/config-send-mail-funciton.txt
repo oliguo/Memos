@@ -116,7 +116,7 @@ http://你的网址/mail.php
 网上方法很多很多，修改这个文件又是修改那个文件，
 感觉比较麻烦，于是找个了操作最少的修改，然后成功了。
 
-修改/etc/hosts ，未修改之前
+修改/etc/hosts(注釋所有無關內容) ，未修改之前
 127.0.0.1 localhost.localdomain localhost
 
 修改成
