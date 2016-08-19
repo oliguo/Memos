@@ -32,6 +32,7 @@ listen 81
     ErrorLog "/opt/lampp/htdocs/website_b/error_log"
   </VirtualHost>
 
+4.restart xampp
 reference:
 http://serverfault.com/questions/246445/how-do-i-create-virtual-hosts-for-different-ports-on-apache/246474
 http://www.9streets.cn/art-php-535.html
