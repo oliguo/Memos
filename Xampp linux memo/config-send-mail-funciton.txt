@@ -2,7 +2,7 @@
 —>
 it would show place where mail function installed,if not,
 just install it,
-run cli:	sudo yum install mail/mailutil or sudo apt-get install mail/mailutil
+run cli:	sudo yum install mailutils or sudo apt-get install mailutils
 or
 run cli:	which sendmail
 
