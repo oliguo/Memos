@@ -61,7 +61,7 @@ FTP:
 groupadd oliftp
 useradd -d /opt/lampp/htdocs/ -g oliftp -s /sbin/nologin  loginName
 passwd loginName
-sudo chmod -R 777  /opt/lampp/htdocs/
+sudo chown -R testuser:testuser /var/www/test/public_html
 
 - — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
 
