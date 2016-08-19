@@ -1,0 +1,37 @@
+1.edit /opt/lampp/etc/httpd.conf
+remove comment '#' below
+#Include etc/extra/httpd-vhosts.conf
+
+2.edit /opt/lampp/etc/httpd.conf
+
+add listen ports you want like to listen
+
+#like website
+listen 80
+#like another website
+listen 81
+....
+
+3.edit edit /opt/lampp/etc/extra/httpd-vhosts.conf
+  3.1 clear file before backup
+  3.2 add below sample
+  
+  # Listen for virtual host requests on all IP addresses
+  NameVirtualHost *:80
+
+  <VirtualHost *:80>
+    DocumentRoot /opt/lampp/htdocs/website_a
+    ServerName www.website_a.com
+    ErrorLog "/opt/lampp/htdocs/website_a/error_log"
+  </VirtualHost>
+
+  NameVirtualHost *:81
+  <VirtualHost *:81>
+    DocumentRoot /opt/lampp/htdocs/website_b
+    ServerName www.website_b.com
+    ErrorLog "/opt/lampp/htdocs/website_b/error_log"
+  </VirtualHost>
+
+reference:
+http://serverfault.com/questions/246445/how-do-i-create-virtual-hosts-for-different-ports-on-apache/246474
+http://www.9streets.cn/art-php-535.html
