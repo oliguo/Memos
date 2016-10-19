@@ -140,3 +140,14 @@ http://computernetworkingnotes.com/ubuntu-12-04-tips-and-tricks/how-to-start-xam
 
 5.sudo reboot
 
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
+if disable to show directory on site:
+find /opt/lampp/etc/httpd.conf
+
+line:    Options Includes Indexes FollowSymLinks MultiViews
+
+then remove word 'Indexes' and save the file. The line should look like this one:
+
+line:    Options Includes FollowSymLinks MultiViews
+
+then restart xampp
