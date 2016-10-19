@@ -124,5 +124,6 @@ http://你的网址/mail.php
 
 查看本机的主机名称的命令是: hostname
 完成修改之后重启下sendmail
-service sendmail restart
+service sendmail restart/sudo service postfix restart
+
 
