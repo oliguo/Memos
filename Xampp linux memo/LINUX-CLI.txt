@@ -151,3 +151,11 @@ then remove word 'Indexes' and save the file. The line should look like this one
 line:    Options Includes FollowSymLinks MultiViews
 
 then restart xampp
+
+- — - - — - - - - — - - - —  — - - - - - - - - - — - - — - - - — - - - - -
+
+INSTALL PHP-CLI
+
+sudo apt-get update && sudo apt-get upgrade
+
+sudo apt-get install php5 php5-gd php5-mysql php5-curl php5-cli php5-cgi php5-dev
