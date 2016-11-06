@@ -12,7 +12,7 @@ listen 80
 listen 81
 ....
 
-3.edit edit /opt/lampp/etc/extra/httpd-vhosts.conf
+3.edit /opt/lampp/etc/extra/httpd-vhosts.conf
   3.1 clear file before backup
   3.2 add below sample
   
