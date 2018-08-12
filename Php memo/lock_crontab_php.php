@@ -1,3 +1,4 @@
+<?php
 $log = dirname(__FILE__) . '/log_omb_omp_assign.txt';
 $lock = dirname(__FILE__) . '/lock_omb_omp_assign';
 $log_file = fopen($log, 'a') or die('Cannot create log file');
