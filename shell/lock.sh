@@ -1,15 +1,16 @@
 #!/bin/sh
-lockfile=/var/tmp/mylock
+#https://unix.stackexchange.com/questions/22044/correct-locking-in-shell-scripts
+lockdir=/var/tmp/mylock
+pidfile=/var/tmp/mylock/pid
 
-if ( set -o noclobber; echo "$$" > "$lockfile") 2> /dev/null; then
-
-        trap 'rm -f "$lockfile"; exit $?' INT TERM EXIT
-
+if ( mkdir ${lockdir} ) 2> /dev/null; then
+        echo $$ > $pidfile
+        trap 'rm -rf "$lockdir"; exit $?' INT TERM EXIT
         # do stuff here
 
         # clean up after yourself, and release your trap
-        rm -f "$lockfile"
+        rm -rf "$lockdir"
         trap - INT TERM EXIT
 else
-        echo "Lock Exists: $lockfile owned by $(cat $lockfile)"
+        echo "Lock Exists: $lockdir owned by $(cat $pidfile)"
 fi
